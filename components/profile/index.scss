@@ -1,4 +1,4 @@
-@import 'vars';
+@import '../vars';
 
 header {
   padding: 2em 1.5em 0 1.5em;
@@ -22,11 +22,11 @@ header {
     padding: 0.5em 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $grey80;
+    border-bottom: 1px solid $grey-80;
 
     > .key {
       text-transform: uppercase;
-      color: $grey60;
+      color: $grey-60;
     }
 
     &.err > * {
