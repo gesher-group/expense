@@ -1,10 +1,10 @@
-const express = require('express')
 const debug = require('debug')('app:server')
-const path = require('path')
-const webpack = require('webpack')
 const webpackConfig = require('../config/webpack.config')
 const project = require('../config/project.config')
 const compress = require('compression')
+const express = require('express')
+const webpack = require('webpack')
+const path = require('path')
 
 const app = express()
 
@@ -17,7 +17,6 @@ app.use(compress())
 if (project.env === 'development') {
   const compiler = webpack(webpackConfig)
 
-  debug('Enabling webpack dev and HMR middleware')
   app.use(require('webpack-dev-middleware')(compiler, {
     publicPath  : webpackConfig.output.publicPath,
     contentBase : project.paths.client(),
@@ -43,9 +42,7 @@ if (project.env === 'development') {
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html')
     compiler.outputFileSystem.readFile(filename, (err, result) => {
-      if (err) {
-        return next(err)
-      }
+      if (err) return next(err)
       res.set('content-type', 'text/html')
       res.send(result)
       res.end()

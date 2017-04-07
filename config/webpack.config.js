@@ -4,13 +4,12 @@ const cssnano = require('cssnano')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const project = require('./project.config')
-const debug = require('debug')('app:config:webpack')
+// const debug = require('debug')('app:config:webpack')
 
 const __DEV__ = project.globals.__DEV__
 const __PROD__ = project.globals.__PROD__
 const __TEST__ = project.globals.__TEST__
 
-debug('Creating configuration.')
 const webpackConfig = {
   name    : 'client',
   target  : 'web',
@@ -84,13 +83,13 @@ if (__TEST__ && !argv.watch) {
 }
 
 if (__DEV__) {
-  debug('Enabling plugins for live development (HMR, NoErrors).')
+  // debug('Enabling plugins for live development (HMR, NoErrors).')
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   )
 } else if (__PROD__) {
-  debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
+  // debug('Enabling plugins for production (OccurenceOrder, Dedupe & UglifyJS).')
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -197,7 +196,7 @@ webpackConfig.module.loaders.push(
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
 if (!__DEV__) {
-  debug('Applying ExtractTextPlugin to CSS loaders.')
+  // debug('Applying ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {

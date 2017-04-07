@@ -34,21 +34,20 @@ const webpackCompiler = (webpackConfig) =>
   })
 
 const compile = () => {
-  debug('Starting compiler.')
   return Promise.resolve()
     .then(() => webpackCompiler(webpackConfig))
     .then(stats => {
       if (stats.warnings.length && project.compiler_fail_on_warning) {
         throw new Error('Config set to fail on warning, exiting with status code "1".')
       }
-      debug('Copying static assets to dist folder.')
+      console.log('Copying static assets to dist folder.')
       fs.copySync(project.paths.public(), project.paths.dist())
     })
     .then(() => {
-      debug('Compilation completed successfully.')
+      console.log('Compilation completed successfully.')
     })
     .catch((err) => {
-      debug('Compiler encountered an error.', err)
+      console.log('Compiler encountered an error.', err)
       process.exit(1)
     })
 }

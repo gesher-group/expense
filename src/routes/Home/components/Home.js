@@ -1,5 +1,5 @@
-import React from 'react'
 import './Home.scss'
+import React from 'react'
 import Profile from './Profile.js'
 import SignIn from './SignIn.js'
 import * as firebase from 'firebase'
@@ -43,15 +43,18 @@ function getWelcomeMessage () {
     <div className='home'>
       <div className='intro'>
         <h1>/expense</h1>
-        <p>An easier way to file expense reports at Formula Slug.</p>
+        <p>An easier way to file expense reports at Gesher Group.</p>
         <p className='subtext'>
-          Not a member of Formula Slug?
+          Not a member of Gesher Group?
           <br /><br />
-          We're a sustainable engineering organization at UCSC, working on
-          electric racecars, solar power, transportation, and more.
+          We're a student-run consultancy at the University of California, Santa
+          Cruz. If you'd like to get in touch about a potential relationship,
+          reach out, or visit our website at <a href='http://geshergroup.org'
+          title='Our website'>geshergroup.org</a>.
           <br /><br />
-          &#62; <a href='mailto:team@formulaslug.com' title='Email the team'>
-          team@formulaslug.com</a>
+
+          &#62; <a href='mailto:team@geshergroup.com' title='Email the team'>
+          team@geshergroup.com</a>
         </p>
       </div>
 

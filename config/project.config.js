@@ -4,7 +4,6 @@ const debug = require('debug')('app:config:project')
 const argv = require('yargs').argv
 const ip = require('ip')
 
-debug('Creating default configuration.')
 // ========================================================
 // Default Configuration
 // ========================================================
@@ -38,7 +37,7 @@ const config = {
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
-  compiler_quiet           : false,
+  compiler_quiet           : true,
   compiler_public_path     : '/',
   compiler_stats           : {
     chunks : false,
@@ -120,14 +119,14 @@ config.paths = {
 // ========================================================
 // Environment Configuration
 // ========================================================
-debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
+// debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
 const environments = require('./environments.config')
 const overrides = environments[config.env]
 if (overrides) {
-  debug('Found overrides, applying to default configuration.')
+  // debug('Found overrides, applying to default configuration.')
   Object.assign(config, overrides(config))
 } else {
-  debug('No environment overrides found, defaults will be used.')
+  // debug('No environment overrides found, defaults will be used.')
 }
 
 module.exports = config
