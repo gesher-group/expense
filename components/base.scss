@@ -46,10 +46,12 @@ hr {
   background: $grey-90;
 }
 
-.home {
+section {
   display: flex;
   flex-direction: column;
   width: 100vw;
+  margin: 0 auto;
+  max-width: 800px;
   height: 100vh;
   flex-grow: 1;
 

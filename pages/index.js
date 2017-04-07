@@ -50,7 +50,7 @@ class Home extends Component {
   }
 
   getWelcomeMessage () {
-    return <div className='home'>
+    return <section className='home'>
       <div className='intro'>
         <h1>/expense</h1>
         <p>An easier way to file expense reports at Gesher Group.</p>
@@ -67,7 +67,7 @@ class Home extends Component {
       </div>
 
       <SignIn firebase={firebase} />
-    </div>
+    </section>
   }
 
   render () {

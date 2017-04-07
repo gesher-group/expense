@@ -3,6 +3,7 @@ import React from 'react'
 function authLink (firebase) {
   var provider = new firebase.auth.GoogleAuthProvider()
   provider.addScope('https://www.googleapis.com/auth/plus.login')
+  provider.setCustomParameters({ hd: 'ucsc.edu' })
   return firebase.auth().signInWithRedirect(provider)
 }
 
