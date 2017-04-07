@@ -76,7 +76,7 @@ class Home extends Component {
         <title>/expense</title>
       </Head>
       <Style sheet={sheet} />
-      { console.log('%cRendering home...', 'color: grey; font-style: italic;padding: 2px') }
+      { console.log(this.state, this.props) }
       { (!this.state.user.uid)
         ? this.getWelcomeMessage()
         : <Profile {...this.state} firebase={firebase} /> }
