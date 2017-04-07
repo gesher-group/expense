@@ -1,0 +1,258 @@
+@import 'mixins';
+
+
+@include keyframes('slideInDown') {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility: visible; }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+}
+
+.slideInDown {
+  -webkit-animation-name: slideInDown;
+  animation-name: slideInDown; }
+
+
+@include keyframes('optionsExit') {
+  from {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  to {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translate3d(0, 2em, 0);
+    transform: translate3d(0, 2em, 0); }
+}
+
+.optionsExit {
+  -webkit-animation-name: optionsExit;
+  animation-name: optionsExit; }
+
+
+@include keyframes('animate--jiggle') {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  33% {
+    -webkit-transform: rotate(-2deg);
+    transform: rotate(-2deg); }
+  67% {
+    -webkit-transform: rotate(2deg);
+    transform: rotate(2deg); }
+  100% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+}
+
+.animate--jiggle {
+  -webkit-animation-name: animate--jiggle;
+  animation-name: animate--jiggle;
+  -webkit-animation-iteration-count: 3;
+  animation-iteration-count: 3;
+  -webkit-transform-origin: 30% 5%;
+  transform-origin: 30% 5%; }
+
+
+@include keyframes('slideInLeft') {
+  0% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible; }
+  60% {
+    -webkit-transform: translate3d(2%, 0, 0);
+    transform: translate3d(2%, 0, 0);
+    visibility: visible; }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+}
+
+.slideInLeft {
+  -webkit-animation-name: slideInLeft;
+  animation-name: slideInLeft; }
+
+
+@include keyframes('slideOutLeft') {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0); }
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+}
+
+.slideOutLeft {
+  -webkit-animation-name: slideOutLeft;
+  animation-name: slideOutLeft; }
+
+
+@include keyframes('fadeOut') {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut; }
+
+
+@include keyframes('fadeInDown') {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2em, 0);
+    transform: translate3d(0, -2em, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none; }
+}
+
+.fadeInDown {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown; }
+
+
+@include keyframes('fadeIn') {
+  from {
+    opacity: 0;
+    visibility: visible; }
+  to { opacity: 1; }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn; }
+
+
+@include keyframes('fadeInUp') {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2em, 0);
+    transform: translate3d(0, 2em, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none; }
+}
+
+.fadeInUp {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp; }
+
+
+@include keyframes('fadeInLeft') {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0); }
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none; }
+}
+
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft; }
+
+
+// transformOut
+@include keyframes('transformOut') {
+  0% {
+    opacity: 1;
+    top: 0; }
+  40% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    top: 2em; }
+}
+
+
+// transformIn
+@include keyframes('transformIn') {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    top: -2em; }
+  60% {
+    opacity: 0; }
+  100% {
+    opacity: 1;
+    top: 0; }
+}
+
+
+// INSERT CHAT EVALINE /////////////////////////////////////////////////////////
+@include keyframes('insertChat--evaline') {
+  0% {
+    max-height: 0;
+    padding: 0;
+    transform: translateX(-100vw); }
+  65% {
+    max-height: 0;
+    padding: 0;
+    transform: translateX(-100vw); }
+  85% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(-100vw); }
+  92% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(6vw); }
+  100% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(0); }
+}
+
+.insertChat--evaline {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-animation-name: insertChat--evaline;
+  animation-name: insertChat--evaline; }
+
+
+// INSERT CHAT USER ////////////////////////////////////////////////////////////
+@include keyframes('insertChat--user') {
+  0% {
+    max-height: 0;
+    padding: 0;
+    transform: translateX(50vw); }
+  20% {
+    max-height: 0;
+    padding: 0;
+    transform: translateX(50vw); }
+  30% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(50vw);
+  }
+  40% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(-5vw);
+  }
+  45% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(0);
+  }
+  100% {
+    max-height: 100%;
+    padding: inherit;
+    transform: translateX(0);
+  }
+}
+
+.insertChat--user {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-animation-name: insertChat--user;
+  animation-name: insertChat--user; }

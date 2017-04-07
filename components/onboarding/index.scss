@@ -1,0 +1,55 @@
+@import '../vars';
+
+header {
+  padding: 2em 1.5em 0 1.5em;
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.inputGroup {
+  margin: 1.5em;
+  display: flex;
+  flex-direction: column;
+
+  input, select {
+    background-color: $grey-90;
+    color: $white;
+    padding: 1em 1.5em;
+    width: auto;
+  }
+
+  .error {
+    font-size: 0.8em;
+    color: $red-50;
+  }
+
+  .notActive {
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .helperText {
+    margin-top: 0;
+    font-size: 0.8em;
+    color: $grey-60;
+  }
+
+  .inputsRow {
+    display: flex;
+    align-items: center;
+    margin-top: 1em;
+
+    .oneThird {
+      flex-shrink: 1;
+    }
+
+    .twoThird {
+      margin-left: 1em;
+      flex-grow: 1;
+    }
+  }
+}
