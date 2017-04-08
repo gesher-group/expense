@@ -28,7 +28,6 @@ class Home extends Component {
   }
 
   checkForUser () {
-    console.log('Checking for user...')
     new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -74,9 +73,9 @@ class Home extends Component {
     return <div>
       <Head>
         <title>/expense</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
       <Style sheet={sheet} />
-      { console.log(this.state, this.props) }
       { (!this.state.user.uid)
         ? this.getWelcomeMessage()
         : <Profile {...this.state} firebase={firebase} /> }

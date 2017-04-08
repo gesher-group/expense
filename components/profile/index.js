@@ -6,12 +6,10 @@ class Profile extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      legalName: '...',
-      ucscEmail: '...',
-      phone: '...',
-      address: ['...'],
-      ssn: '...',
-      payeeSetupSubmitted: false
+      name: '',
+      email: this.props.user.email,
+      phone: '',
+      address: []
     }
   }
 
@@ -21,76 +19,109 @@ class Profile extends Component {
     return window.location.reload(true)
   }
 
-  getSavedData (props) {
-    let db = props.firebase.database()
+  componentDidMount () {
+    let db = this.props.firebase.database()
 
-    db.ref('/users/' + props.uid).once('value').then((snapshot) => {
-      let legalName = snapshot.val()['legalName']
-      let ucscEmail = snapshot.val()['ucscEmail']
-      let phone = snapshot.val()['phone']
-
+    db.ref('users').child(this.props.user.uid).once('value').then((snapshot) => {
       this.setState({
-        legalName,
-        ucscEmail,
-        phone
+        name: snapshot.val()['name'],
+        phone: snapshot.val()['phone'],
+        address: snapshot.val()['address'].split('\\n')
       })
-    })
+    }, (error) => console.log('Something went wrong: ', error))
   }
 
   formatAddress (address) {
     let res = []
-    for (let row in address) {
-      res.push(<div className='address' key={'address' + row}>{address[row]}</div>)
+    for (let i in address) {
+      res.push(<div className='address' key={'address' + i}>{address[i]}</div>)
     }
     return res
   }
 
-  formatPhoneNumber (s) { // http://stackoverflow.com/a/8358141/6037036
-    if (s === '...') return s
-    let s2 = ('' + s).replace(/\D/g, '')
-    let m = s2.match(/^(\d{3})(\d{3})(\d{4})$/)
-    return (!m) ? null : m[1] + '.' + m[2] + '.' + m[3]
+  formatPhoneNumber (original) {
+    if (original === undefined) return original
+    let cleanNumber = original.toString().replace(/[^0-9]+/g, '')
+    let response = cleanNumber
+    let length = cleanNumber.length
+
+    if (length > 14) {
+      cleanNumber = cleanNumber.substring(0, 14)
+      length = cleanNumber.length
+    }
+
+    if (length > 10) {
+      response = `+${cleanNumber.substring(0, length - 10)} (${
+        cleanNumber.substring(length - 10, length - 7)}) ${
+        cleanNumber.substring(length - 7, length - 4)}-${
+        cleanNumber.substring(length - 4, length)}`
+    } else if (length > 7) {
+      response = `(${cleanNumber.substring(0, 3)}) ${
+        cleanNumber.substring(3, 6)}-${cleanNumber.substring(6, length)}`
+    } else if (length > 3) {
+      response = `(${cleanNumber.substring(0, 3)}) ${
+        cleanNumber.substring(3, length)}`
+    } else if (length > 2) response = `(${cleanNumber.substring(0, 3)}`
+
+    return response
+  }
+
+  getSavedData () {
+    if (this.state.name) {
+      return <div className='savedData'>
+        <div className='row'>
+          <div className='key'>Saved data</div>
+          {/* <div className='key'><div class='onboarding'>Edit</div></div> */}
+          {/* TODO: Make that edit button do stuff */}
+        </div>
+
+        <div className='row' key='name'>
+          <div className='key'>Name</div>
+          <div className='value'>{ this.state.name }</div>
+        </div>
+
+        <div className='row'>
+          <div className='key'>Email</div>
+          <div className='value'>{ this.state.email }</div>
+        </div>
+
+        <div className='row'>
+          <div className='key'>Phone</div>
+          <div className='value'>{ this.formatPhoneNumber(this.state.phone) }</div>
+        </div>
+
+        <div className='row'>
+          <div className='key'>Address</div>
+          <div className='value'>{ this.formatAddress(this.state.address) }</div>
+        </div>
+      </div>
+    } else {
+      return <div className='savedData'>
+        <div className='row'>
+          <div className='key'>Saved data</div>
+        </div>
+      </div>
+    }
   }
 
   render () {
     return (
       <div className='page'>
         <Style sheet={sheet} />
-        { (this.state.legalName === '...') ? this.getSavedData(this.props) : console.log(this.state.legalName) }
         <header>
           <nav>
             <h1>/expense</h1>
             <div onClick={() => this.signOut(this.props.firebase)} className='link subtext'>Logout</div>
           </nav>
 
-          <p>Make sure the saved data we have below is accurate—we use this to fill out expense forms for you.</p>
+          <p>Make sure the saved data we have below is accurate—we use this to
+            track expenses, and send you checks.</p>
           <p className='subtext'>
             Need help? Post in <a href='https://fsae.slack.com/messages/finance/' className='link'>#finance</a>.
           </p>
         </header>
 
-        <div className='savedData'>
-          <div className='row'>
-            <div className='key'>Saved data</div>
-            {/* <div className='key'><div class='onboarding'>Edit</div></div> */}
-            {/* TODO: Make that edit button do stuff */}
-          </div>
-
-          <div className='row'>
-            <div className='key'>Legal name</div>
-            <div className='value'>{ this.state.legalName }</div>
-          </div>
-
-          <div className='row'>
-            <div className='key'>UCSC email</div>
-            <div className='value'>{ this.state.ucscEmail }</div>
-          </div>
-
-          <div className='row'>
-            <div className='key'>Phone</div>
-            <div className='value'>{ this.formatPhoneNumber(this.state.phone) }</div>
-          </div>
-        </div>
+        { this.getSavedData() }
 
         {/* <Link to='/expense' className='button'>File a new expense report</Link> */}
       </div>
