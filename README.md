@@ -11,6 +11,9 @@ Head on over to geshergroup.org/apply, and submit an application to join. If you
 
 ---
 
+# Prerequisites
+You'll need [yarn](https://yarnpkg.com/en/docs/install) and [NPM](https://www.npmjs.com/get-npm) to get started. I've written these instructions and tested on MacOS, but everything should also work on PC and Linux.
+
 # Installation instructions
 1. Clone the repo, and install all dependencies with `npm i`.
 2. Run `yarn run dev`. 
