@@ -37,8 +37,8 @@
 }
 
 @mixin animate($s) {
-  -webkit-animation-duration: $s;
-  animation-duration: $s;
   -webkit-animation-fill-mode: both;
+  -webkit-animation-duration: $s;
   animation-fill-mode: both;
+  animation-duration: $s;
 }

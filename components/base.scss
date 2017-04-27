@@ -55,6 +55,11 @@ section {
   height: 100vh;
   flex-grow: 1;
 
+  &.home {
+    @include animate(0.512s);
+    @extend .fadeIn;
+  }
+
   .intro {
     padding: 1.5em;
     flex-grow: 1;
@@ -62,4 +67,14 @@ section {
     flex-direction: column;
     justify-content: center;
   }
+}
+
+.section-transition-enter {
+  @include animate(0.512s);
+  @extend .fadeInUp;
+}
+
+.section-transition-leave-active {
+  @include animate(0.512s);
+  @extend .fadeOutUp;
 }

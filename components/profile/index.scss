@@ -1,4 +1,5 @@
 @import '../vars';
+@import '../mixins';
 @import '../animations';
 
 header {
@@ -8,6 +9,22 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+
+    div:last-of-type {
+      margin-right: 3em;
+    }
+
+    img.profile-pic {
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      -webkit-transform: -webkit-translateY(-50%);
+    }
   }
 }
 
@@ -16,7 +33,6 @@ header {
   margin: 1em 1.5em;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 
   .row {
     width: 100%;
@@ -25,17 +41,20 @@ header {
     justify-content: space-between;
     border-bottom: 1px solid $grey-80;
 
-    &:nth-child(1) { animation-delay: 0.1s; }
-    &:nth-child(2) { animation-delay: 0.2s; }
-    &:nth-child(3) { animation-delay: 0.3s; }
-    &:nth-child(4) { animation-delay: 0.4s; }
-    &:nth-child(5) { animation-delay: 0.5s; }
-    &:nth-child(6) { animation-delay: 0.6s; }
-    animation-duration: 0.2s;
-    -webkit-animation-duration: 0.3s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    @extend .fadeInDown;
+    &:nth-child(1) > .value { animation-delay: 0.1s; }
+    &:nth-child(2) > .value { animation-delay: 0.2s; }
+    &:nth-child(3) > .value { animation-delay: 0.3s; }
+    &:nth-child(4) > .value { animation-delay: 0.4s; }
+    &:nth-child(5) > .value { animation-delay: 0.5s; }
+    &:nth-child(6) > .value { animation-delay: 0.6s; }
+
+    > .value {
+      animation-duration: 0.2s;
+      -webkit-animation-duration: 0.3s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      @extend .fadeInDown;
+    }
 
     > .key {
       text-transform: uppercase;
@@ -71,10 +90,9 @@ header {
 .page {
   height: 100vh;
   width: 100vw;
+  max-width: 800px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-
-  .button {
-  }
+  justify-content: center;
 }

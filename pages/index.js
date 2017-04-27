@@ -5,6 +5,7 @@ import sheet from '../components/base.scss'
 import * as firebase from 'firebase'
 import Profile from '../components/profile'
 import SignIn from '../components/general/signin'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 
 if (!firebase.apps.length) {
   console.log('%cCreating a new firebase instance...', 'color: grey; font-style: italic;padding: 2px')
@@ -49,38 +50,52 @@ class Home extends Component {
   }
 
   getWelcomeMessage () {
-    return <section className='home'>
-      <div className='intro'>
-        <h1>/expense</h1>
-        <p>An easier way to file expense reports at Gesher Group.</p>
-        <p className='subtext'>
-          Not a member of Gesher Group?
-          <br /><br />
-          We're a student-run consultancy at the University of California, at
-          Santa Cruz. If you'd like to get in touch, email us below, or visit our
-          website at geshergroup.org.
-          <br /><br />
-          &#62; <a href='mailto:team@geshergroup.org' title='Email the team'>
-          team@geshergroup.org</a>
-        </p>
-      </div>
+    return (
+      <section className='home' key='login-screen'>
+        <div className='intro'>
+          <h1>/expense</h1>
+          <p>An easier way to file expense reports at Gesher Group.</p>
+          <p className='subtext'>
+            Not a member of Gesher Group?
+            <br /><br />
+            We're a student-run consultancy at the University of California, at Santa Cruz. If you'd like to get in touch, email us below, or visit our website at geshergroup.org.
+            <br /><br />
+            &#62; <a href='mailto:team@geshergroup.org' title='Email the team'>
+            team@geshergroup.org</a>
+          </p>
+        </div>
 
-      <SignIn firebase={firebase} />
-    </section>
+        <SignIn firebase={firebase} />
+      </section>
+    )
   }
 
   render () {
-    return <div>
-      <Head>
-        <title>/expense</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
-      <Style sheet={sheet} />
-      { (!this.state.user.uid)
-        ? this.getWelcomeMessage()
-        : <Profile {...this.state} firebase={firebase} /> }
-      { (!this.state.user.uid) ? this.checkForUser() : null }
-    </div>
+    return (
+      <div className='app-container'>
+        <Head>
+          <title>/expense</title>
+          <meta name='viewport'
+            content='initial-scale=1.0, width=device-width' />
+        </Head>
+
+        <Style sheet={sheet} />
+
+        <CSSTransitionGroup
+          component='div'
+          transitionName='section-transition'
+          transitionEnterTimeout={512}
+          transitionLeaveTimeout={512}
+        >
+          { (!this.state.user.uid)
+            ? this.getWelcomeMessage()
+            : <Profile {...this.state} firebase={firebase} />
+          }
+        </CSSTransitionGroup>
+
+        { (!this.state.user.uid) ? this.checkForUser() : null }
+      </div>
+    )
   }
 }
 
