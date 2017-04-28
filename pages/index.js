@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import Style from '../components/general/style'
 import sheet from '../components/base.scss'
 import * as firebase from 'firebase'
+
+import Expense from '../components/expense'
 import Profile from '../components/profile'
 import SignIn from '../components/general/signin'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
@@ -24,7 +26,8 @@ class Home extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      user: {}
+      user: {},
+      section: ''
     }
   }
 
@@ -70,6 +73,22 @@ class Home extends Component {
     )
   }
 
+  getSection () {
+    if (!this.state.user.uid) {
+      return this.getWelcomeMessage()
+    } else if (this.state.section === 'expense') {
+      return (<Expense {...this.state} firebase={firebase} />)
+    } else {
+      return (
+        <Profile
+          {...this.state}
+          firebase={firebase}
+          updateSection={(section) => this.setState({ section })}
+        />
+      )
+    }
+  }
+
   render () {
     return (
       <div className='app-container'>
@@ -87,10 +106,7 @@ class Home extends Component {
           transitionEnterTimeout={512}
           transitionLeaveTimeout={512}
         >
-          { (!this.state.user.uid)
-            ? this.getWelcomeMessage()
-            : <Profile {...this.state} firebase={firebase} />
-          }
+          { this.getSection() }
         </CSSTransitionGroup>
 
         { (!this.state.user.uid) ? this.checkForUser() : null }

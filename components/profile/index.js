@@ -150,6 +150,11 @@ class Profile extends Component {
 
         { this.getSavedData() }
 
+        <div className='button'
+          onClick={() => this.props.updateSection('expense')}>
+          File an expense
+        </div>
+
         {/* <Link to='/expense' className='button'>File a new expense report</Link> */}
       </div>
     )
